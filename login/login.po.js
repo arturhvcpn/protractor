@@ -6,12 +6,12 @@ module.exports = class LoginPage{
 
 		driver.manage().window().maximize(); 
 		
-		
 		/*CODE WITHOUT ENVIRONMENT PARAMS
 		*/		
-			driver.get('');
-			element(by.id('_58_login')).sendKeys('');
-			element(by.id('_58_password')).sendKeys('');
+			// driver.get('https://core.plataformatarget.com.br/web/facilit/login');
+			driver.get('http://localhost:8080/web/facilit/login');
+			element(by.id('_58_login')).sendKeys('rudiney@facilit.com.br');
+			element(by.id('_58_password')).sendKeys('123456');
 		
 		/*CODE WITH ENVIRONMENT PARAMS, 
 		* Values defined on Linux and getted on conf.js

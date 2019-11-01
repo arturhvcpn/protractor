@@ -1,12 +1,13 @@
-const IndicatorAccessView = require('../../indicator/indicatorAccessView.po');
-const IndicatorAddView = require('../../indicator/indicatorAddView.po');
-const IndicatorTestCases = require('../../indicator/indicatorTestCases.po');
+const IndicatorAccessView = require('../../entities/indicator/indicatorAccessView.po');
+const IndicatorAddView = require('../../entities/indicator/indicatorAddView.po');
+const IndicatorTestCases = require('../../entities/indicator/indicatorTestCases.po');
 let indicatorTestCases = new IndicatorTestCases();
+const IndicatorReadSheet = require('../../entities/indicator/dataDrivenTest/indicatorReadSheet');
 
 describe('/e2e/specs/indicator/specIndicator.js', function(){
 
-    beforeEach(function(){
-
+    beforeEach(function(done){
+        done();
     });
   
     // it('Access Indicator List View', function(){
@@ -43,14 +44,31 @@ describe('/e2e/specs/indicator/specIndicator.js', function(){
             
     // });
         
-    it('Create Tatical Indicator - C742 TestRail', function(){
+    it('Create Tatical Indicator - C742 TestRail', function(done){
+        let indicatorSheet = new IndicatorReadSheet();
+
+        indicatorSheet.getIndicators().then(indicators => {
+            
+            global.indicatorsFromSheet = indicators;
+
+            indicators.forEach(indicator => {
+
+                indicatorTestCases.case742(indicator);
+                done();
+            })
+        });
         
-        indicatorTestCases.case742();
-        
-    });      
+    },3600000);//1h SETTING TIMEOUT     
     
     it('Advanced Search Tatical Indicator - C743 TestRail', function(){
-        indicatorTestCases.case743();
+        
+        if(global.indicatorsFromSheet !== undefined){
+    
+            let indicator = global.indicatorsFromSheet.pop();
+        
+            indicatorTestCases.case743(indicator);
+        }
+    
     });
 
 })

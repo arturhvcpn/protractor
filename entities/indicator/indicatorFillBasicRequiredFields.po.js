@@ -21,39 +21,43 @@ module.exports = class IndicatorFillBasicRequiredFields extends IndicatorAddView
 
     }
 
-    fillBasicRequiredFields(){
+    fillBasicRequiredFields(indicator){
         
-        this.fillName();
+        this.fillName(indicator);
         
-        var ngModelIndicadorTypeSelect = 'data.indicator.typeValue';
-        var cssOptionToSelect = '.test-indicator-type-PROCESS';
+        let ngModelIndicadorTypeSelect = 'data.indicator.typeValue';
+        let cssOptionToSelect = '.test-indicator-type-PROCESS';
         this.selectItem(ngModelIndicadorTypeSelect, cssOptionToSelect);
 
-        var agencyName = "Fac ";//
-        var cssSelector = '.test-search-agency-on-add-indicator .test-input-flexcomplete';
+        //FAZER CADASTRO DE INSTITUIÇÃO ou CRIAR BASE NOVA DEFAULT JÁ COM INSTITUIÇÃO?
+        // let agencyName = "Facilit";
+        let agencyName = indicator.agency;
+        let cssSelector = '.test-search-agency-on-add-indicator .test-input-flexcomplete';
         this.searchEntityByName_QuickSearch(agencyName, cssSelector)
 
-        var responsibleName= 'Eve ';
+        // let responsibleName= 'Everson';
+        let responsibleName = indicator.responsible;
         this.findResponsibleByName(responsibleName);
-        this.findMonitorByName(responsibleName);
+        
+        this.findMonitorByName(indicator.monitor);
 
-        var cssTabValues = '.test-indicator-tab-values';
+        let cssTabValues = '.test-indicator-tab-values';
         this.changeIndicatorTab(cssTabValues);
         
-        var ngModelIndicatorPeriodicity = 'data.indicator.measurementIntervalNumberDays';
-        var cssOptionPeriodicityMontly = 'option[label="Quinzenal"]';
+        let ngModelIndicatorPeriodicity = 'data.indicator.measurementIntervalNumberDays';
+        let cssOptionPeriodicityMontly = 'option[label="Quinzenal"]';
         this.selectItem(ngModelIndicatorPeriodicity, cssOptionPeriodicityMontly);
-        
+      
     }
 
-    fillName(){
-        this.indicator.name = 'Ind. Test Protractor '
-            .concat(this.dateTime)
-            .concat(' - ')
-            .concat(browser.browserName);
-        var cssInputIndicatorName = '.test-indicator-name';
+    fillName(indicator){
+        // this.indicator.name = 'Ind. Test Protractor '
+        //     .concat(this.dateTime)
+        //     .concat(' - ')
+        //     .concat(browser.browserName);
+        let cssInputIndicatorName = '.test-indicator-name';
 
-        this.fillInputField(this.indicator.name, cssInputIndicatorName);
+        this.fillInputField(indicator.name, cssInputIndicatorName);
     }
 
     selectIndicatorGroup(cssIndicatorGroup){

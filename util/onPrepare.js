@@ -1,8 +1,9 @@
 var HtmlReporter = require('protractor-beautiful-reporter');
 
 var mkdirp = require('mkdirp');
-
 var getDateFormated = require('./getDateFormated.js');
+
+const workspaceFolder = process.cwd();
 
 var resultFolder = '../../testsProtractorResults/' + getDateFormated();
 
@@ -44,6 +45,8 @@ function onPrepare () {
     //Getting brownserName during execution
     browser.driver.getCapabilities().then(function(caps){
         browser.browserName = caps.get('browserName');
+        
+         //global.testGlobalVariable = 'testing global variable inner onPrepare()';
     });
 }
 
