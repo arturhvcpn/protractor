@@ -8,10 +8,10 @@ module.exports = class LoginPage{
 		
 		/*CODE WITHOUT ENVIRONMENT PARAMS
 		*/		
-			// driver.get('https://core.plataformatarget.com.br/web/facilit/login');
-			driver.get('http://localhost:8080/web/facilit/login');
-			element(by.id('_58_login')).sendKeys('rudiney@facilit.com.br');
-			element(by.id('_58_password')).sendKeys('123456');
+			// driver.get('https://core..../login');
+			driver.get('http://localhost:8080/web/.../login');
+			element(by.id('_58_login')).sendKeys('rudiney@...');
+			element(by.id('_58_password')).sendKeys('...');
 		
 		/*CODE WITH ENVIRONMENT PARAMS, 
 		* Values defined on Linux and getted on conf.js
